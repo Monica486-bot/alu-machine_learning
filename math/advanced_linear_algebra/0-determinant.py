@@ -10,7 +10,7 @@ def determinant(matrix):
     if matrix == [[]]:
         return 1
     n = len(matrix)
-    if any(len(r) != n for r in matrix):
+    if n == 0 or any(len(r) != n for r in matrix):
         raise ValueError("matrix must be a square matrix")
     if n == 1:
         return matrix[0][0]

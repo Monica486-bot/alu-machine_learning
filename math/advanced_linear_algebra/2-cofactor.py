@@ -1,6 +1,22 @@
 #!/usr/bin/env python3
 """Module for calculating the cofactor matrix of a matrix."""
-minor = __import__('1-minor').minor
+
+
+def _det(matrix):
+    """Calculate the determinant of a matrix (internal helper)."""
+    if matrix == [[]]:
+        return 1
+    n = len(matrix)
+    if n == 1:
+        return matrix[0][0]
+    if n == 2:
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    det = 0
+    for j in range(n):
+        sub = [[matrix[i][k] for k in range(n) if k != j]
+               for i in range(1, n)]
+        det += ((-1) ** j) * matrix[0][j] * _det(sub)
+    return det
 
 
 def cofactor(matrix):
@@ -11,6 +27,9 @@ def cofactor(matrix):
     n = len(matrix)
     if n == 0 or any(len(r) != n for r in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
-    m = minor(matrix)
-    return [[m[i][j] * ((-1) ** (i + j)) for j in range(n)]
-            for i in range(n)]
+    if n == 1:
+        return [[1]]
+    return [[_det([[matrix[i][k] for k in range(n) if k != j]
+                   for i in range(n) if i != row]) * ((-1) ** (row + j))
+             for j in range(n)]
+            for row in range(n)]
