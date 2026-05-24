@@ -4,13 +4,13 @@
 
 def determinant(matrix):
     """Calculate and return the determinant of a matrix."""
-    if not isinstance(matrix, list) or not all(
+    if not isinstance(matrix, list) or len(matrix) == 0 or not all(
             isinstance(r, list) for r in matrix):
         raise TypeError("matrix must be a list of lists")
     if matrix == [[]]:
         return 1
     n = len(matrix)
-    if n == 0 or any(len(r) != n for r in matrix):
+    if any(len(r) != n for r in matrix):
         raise ValueError("matrix must be a square matrix")
     if n == 1:
         return matrix[0][0]
