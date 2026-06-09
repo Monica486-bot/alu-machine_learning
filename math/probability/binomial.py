@@ -25,18 +25,21 @@ class Binomial:
             self.n = round(mean / p)
             self.p = float(mean / self.n)
 
+    @staticmethod
+    def _factorial(n):
+        """Calculate factorial of n."""
+        r = 1
+        for i in range(1, n + 1):
+            r *= i
+        return r
+
     def pmf(self, k):
         """Calculate PMF for k successes."""
         k = int(k)
         if k < 0 or k > self.n:
             return 0
-        def factorial(x):
-            """Calculate factorial of x."""
-            r = 1
-            for i in range(1, x + 1):
-                r *= i
-            return r
-        c = factorial(self.n) // (factorial(k) * factorial(self.n - k))
+        c = (self._factorial(self.n)
+             // (self._factorial(k) * self._factorial(self.n - k)))
         return c * (self.p ** k) * ((1 - self.p) ** (self.n - k))
 
     def cdf(self, k):
