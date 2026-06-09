@@ -5,7 +5,7 @@
 class Exponential:
     """Represents an Exponential distribution."""
 
-    e = 2.718281828459045
+    e = 2.7182818285
 
     def __init__(self, data=None, lambtha=1.):
         """Initialize Exponential distribution."""

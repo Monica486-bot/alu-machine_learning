@@ -5,8 +5,8 @@
 class Normal:
     """Represents a Normal distribution."""
 
-    e = 2.718281828459045
-    pi = 3.141592653589793
+    e = 2.7182818285
+    pi = 3.1415926536
 
     def __init__(self, data=None, mean=0., stddev=1.):
         """Initialize Normal distribution."""
